@@ -2,10 +2,10 @@ const { app, BrowserWindow } = require('electron')
 const path = require("path");
 
 const PY_FOLDER = "pyflask";
-const PY_MODULE = "engine";
+const PY_MODULE = "apirun";
 
 let pyProc = null;
-const pyPort = "5000"; // Flask default port
+const pyPort = "3000"; // Flask default port
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -23,7 +23,7 @@ const createPyProc = () => {
     // pyProc = require("child_process").spawn("python", [script, pyPort], {
     //     stdio: "ignore",
     // });
-    pyProc = require("child_process").spawn("python", ['-u', script, pyPort],
+    pyProc = require("child_process").spawn("python", [script],
         {
             stdio: 'pipe',
             shell: false
@@ -72,7 +72,8 @@ function createWindow() {
     });
 
     // and load the index.html of the app.
-    mainWindow.loadFile("index.html");
+    //mainWindow.loadFile("index.html");
+    mainWindow.loadFile(path.join(__dirname, '/dist/index.html'));
 
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
